@@ -263,7 +263,27 @@ Deliverables:
 - qualitative and quantitative eval;
 - notes on overfitting and scale limits.
 
-### Milestone 5 — Sampling and evaluation
+### Milestone 5 — Checkpoints and SafeTensors
+
+Outcome:
+
+```text
+trained tiny model → named tensors → portable checkpoint artifacts → inspectable model weights
+```
+
+Deliverables:
+
+- explain PyTorch `state_dict` as the first mental model for model weights;
+- save and load tiny-model checkpoints using PyTorch-native checkpointing;
+- introduce SafeTensors as a safe, fast tensor serialization format rather than a replacement for PyTorch;
+- save the same tiny-model weights as `.safetensors`;
+- inspect SafeTensors contents by listing tensor names, shapes, dtypes, and metadata;
+- document why weights alone are not a complete model without architecture, config, and tokenizer;
+- compare how Hugging Face-style model directories combine config, tokenizer files, and SafeTensors weight shards.
+
+Rationale: modern LLM artifacts often use SafeTensors, but SafeTensors is easiest to understand after the user has a concrete `state_dict` and checkpoint mental model. PyTorch remains the learning tool for computation, autograd, and training; SafeTensors becomes the learning tool for weight storage, safety, and ecosystem compatibility.
+
+### Milestone 6 — Sampling and evaluation
 
 Outcome:
 
@@ -280,7 +300,7 @@ Deliverables:
 - repeat behavior observations;
 - simple eval harness.
 
-### Milestone 6 — Compare with local open-weight models
+### Milestone 7 — Compare with local open-weight models
 
 Outcome:
 
@@ -316,6 +336,25 @@ Use Python for:
 - PyTorch autograd;
 - transformer training;
 - Apple Silicon MPS experiments.
+
+### SafeTensors and checkpoint formats
+
+Use SafeTensors for:
+
+- understanding how modern LLM weights are stored;
+- safe tensor serialization without Python pickle semantics;
+- inspecting tensor names, shapes, dtypes, and metadata;
+- comparing tiny local checkpoints with Hugging Face-style model artifacts;
+- learning the boundary between weights, architecture code, config, and tokenizer files.
+
+SafeTensors should not replace PyTorch in the learning path. In this project:
+
+```text
+PyTorch = computation, autograd, training, model structure
+SafeTensors = checkpoint/weight storage, inspection, interchange
+```
+
+Introduce SafeTensors after PyTorch `state_dict`, not before it.
 
 ### Local model tooling
 
