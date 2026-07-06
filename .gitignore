@@ -1,0 +1,42 @@
+# OS/editor
+.DS_Store
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Local env
+.env
+.env.*
+!.env.example
+
+# Logs and temp files
+*.log
+.tmp/
+tmp/
+
+# Go
+/bin/
+*.test
+coverage.out
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Project-local worktrees
+.worktrees/
+worktrees/
+
+# Generated data/model artifacts: keep placeholders, ignore bulk files
+data/raw/*
+!data/raw/.gitkeep
+data/processed/*
+!data/processed/.gitkeep
+models/checkpoints/*
+!models/checkpoints/.gitkeep
